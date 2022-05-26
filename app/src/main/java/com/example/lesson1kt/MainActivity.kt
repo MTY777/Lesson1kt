@@ -15,26 +15,33 @@ import com.example.lesson1kt.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
+
+    companion object{
+        private const val KEY_ONE: String = "one_key"
+        private const val KEY_TWO: String = "two_key"
+    }
+
     private lateinit var binding: ActivityMainBinding
+
     val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            binding.et.setText(result.data?.getStringExtra("two_key"))
+            binding.et.setText(result.data?.getStringExtra(KEY_TWO))
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-init()
+        init()
     }
-    private fun init(){
-        binding.et.setText(intent.getStringExtra("two_key"))
+
+    private fun init() {
         binding.btn.setOnClickListener {
             if (binding.et.text.toString().isEmpty()) {
-                showToast("Пусто")
+                showToast(getString(R.string.empty))
             } else {
                 Intent(this, SecondActivity::class.java).apply {
-                    putExtra("one_key", binding.et.text.toString())
+                    putExtra(KEY_ONE, binding.et.text.toString())
                     startForResult.launch(this)
                 }
 

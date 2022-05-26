@@ -2,4 +2,5 @@
     <string name="app_name">Lesson1, kt</string>
     <string name="one">1</string>
     <string name="write_here">write here</string>
+    <string name="empty">Пусто</string>
 </resources>
